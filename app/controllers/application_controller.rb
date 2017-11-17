@@ -5,5 +5,8 @@ class ApplicationController < ActionController::Base
 
   def index
   end
+<<<<<<< HEAD
 
+=======
+>>>>>>> 44b0281daca0f13168d57a78dd9f4da96986f93f
 end

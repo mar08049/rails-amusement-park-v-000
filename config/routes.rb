@@ -10,5 +10,8 @@ Rails.application.routes.draw do
 
   root 'application#index'
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 44b0281daca0f13168d57a78dd9f4da96986f93f
 end
