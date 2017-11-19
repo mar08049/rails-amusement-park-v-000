@@ -7,25 +7,22 @@ class UsersController < ApplicationController
 
   def create
     user = User.new(user_params)
-      if user.save
-        session[:user_id] = user.id
-        redirect_to user_path(user)
-      else
-        render :new
-      end
+    if user.save
+      session[:user_id] = user.id
+      redirect_to user_path(user)
+    else
+      render :new
+    end
   end
 
   def show
-      @user = User.find(params[:id])
+    @user = User.find(params[:id])
   end
 
   private
 
-  def require_login
-    redirect_to root_path unless session.include? :user_id
+  def user_params
+    params.require(:user).permit(:name, :password, :happiness, :nausea, :tickets, :height, :admin)
   end
 
-  def user_params
-    params.require(:user).permit(:name, :password, :nausea, :happiness, :tickets, :height, :admin)
-  end
 end

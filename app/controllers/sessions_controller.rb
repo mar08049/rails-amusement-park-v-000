@@ -1,19 +1,24 @@
 class SessionsController < ApplicationController
-  def signin
+
+  def new
   end
 
-  def login
-    user = User.find_by(name: params[:user][:name])
-    if user && user.authenticate(params[:user][:password])
-      session[:user_id] = user.id
-      redirect_to user_path(user)
+  def create
+    if params[:user][:name] && params[:user][:password]
+      @user = User.authenticate(params[:user][:name], params[:user][:password])
+    end
+
+    if @user
+      session[:user_id] = @user.id
+      redirect_to @user
     else
-      redirect_to root_path
+      render :new
     end
   end
 
-  def logout
-    session.clear
+  def destroy
+    session.delete :user_id
     redirect_to root_path
   end
+
 end

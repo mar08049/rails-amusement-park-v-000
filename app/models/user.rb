@@ -1,3 +1,4 @@
+
 class User < ActiveRecord::Base
   has_many :rides
   has_many :attractions, through: :rides
@@ -5,11 +6,10 @@ class User < ActiveRecord::Base
   has_secure_password
 
   def mood
-    if self.nausea > self.happiness
-      "sad"
-    else
-      "happy"
-    end
+    self.nausea > self.happiness ? "sad" : "happy"
   end
 
+  def self.authenticate(name, password)
+    user = User.find_by(name: name).try(:authenticate, password)
+  end
 end
